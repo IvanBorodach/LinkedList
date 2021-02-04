@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs
+/SimCorpsAssignment/.vs/SimCorpsAssignment
+/SimCorpsAssignment/Collections/obj
+/SimCorpsAssignment/CollectionsTests/obj
