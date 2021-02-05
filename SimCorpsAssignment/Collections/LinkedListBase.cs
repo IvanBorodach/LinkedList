@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Collections.Elements;
 
 namespace Collections
 {
-    public abstract class LinkedListBase<TNode>
+    public abstract class LinkedListBase<TNode, TNodeIn> : ILinkedList<TNode> where TNode : INode 
     {
         /// <summary>
         /// Adds a new node to the end of the list
@@ -13,8 +13,6 @@ namespace Collections
         /// <param name="node"></param>
         public virtual void Add(string text) 
         {
-            var a = new List<string>();
-            var b = a.ToArray();
             throw new NotImplementedException();
         }
 
@@ -42,16 +40,16 @@ namespace Collections
         /// Deletes specified node from collection
         /// </summary>
         /// <param name="node">Node to delete</param>
-        public void Delete(TNode node)
+        public void Delete(object node)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Copies the elements to a new array
+        /// Node values in an array
         /// </summary>
-        /// <returns>Array containing copies of elements in this list</returns>
-        TNode[] ToArray()
+        /// <returns>Array of node values</returns>
+        public string[] ToArray()
         {
             throw new NotImplementedException();
         }

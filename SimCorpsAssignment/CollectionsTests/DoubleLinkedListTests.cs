@@ -1,6 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Collections;
+using Collections.Elements;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace CollectionsTests
@@ -8,5 +9,9 @@ namespace CollectionsTests
     [TestClass]
     public class DoubleLinkedListTests : LinkedListTestsBase
     {
+       public DoubleLinkedListTests()
+        {
+            list = new DoubleLinkedList();
+        }
     }
 }

@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Collections
 {
-    public class SingleLinkedList : LinkedListBase<Node>
+    public class SingleLinkedList : LinkedListBase<Node, Node>
     {
+        public SingleLinkedList(){ }
     }
 }
