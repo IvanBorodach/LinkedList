@@ -5,15 +5,20 @@ using Collections.Elements;
 
 namespace Collections
 {
-    public abstract class LinkedListBase<TNode, TNodeIn> : ILinkedList<TNode> where TNode : INode 
+    public abstract class LinkedListBase<TNode, TNodeIn> : ILinkedList<TNode> where TNode : INode
     {
+        protected TNode head;
+
+        #region Public Methods
         /// <summary>
         /// Adds a new node to the end of the list
         /// </summary>
         /// <param name="node"></param>
-        public virtual void Add(string text) 
-        {
-            throw new NotImplementedException();
+        public virtual void Add(string text)
+        {            
+            var last = Traverse(x => IsLast(x), head);
+            var node = Insert(last, text);
+            head = head ?? node;
         }
 
         /// <summary>
@@ -53,5 +58,36 @@ namespace Collections
         {
             throw new NotImplementedException();
         }
+        #endregion
+
+
+        #region Protected Methods
+        protected virtual bool IsLast(INode node)
+        {
+            return node.Next == null;
+        }
+
+        /// <summary>
+        /// Searches for first node that matches condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <param name="startNode"></param>
+        /// <returns>First node found. Null if nothing found</returns>
+        protected INode Traverse(Func<INode, bool> predicate, INode startNode)
+        {
+            if (startNode == null) return null;
+            return predicate(startNode)
+                ? startNode
+                : Traverse(predicate, startNode.Next);
+        }
+
+        /// <summary>
+        /// Inserts a node
+        /// </summary>
+        /// <param name="insetAfter"></param>
+        /// <returns>Node inserted</returns>
+        protected abstract TNode Insert(INode insetAfter, string text);
+
+        #endregion
     }
 }

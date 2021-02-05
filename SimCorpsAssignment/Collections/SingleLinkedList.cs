@@ -8,5 +8,13 @@ namespace Collections
     public class SingleLinkedList : LinkedListBase<Node, Node>
     {
         public SingleLinkedList(){ }
+
+        protected override Node Insert(INode insertAfter, string text)
+        {
+            var newNode = new Node { Text = text };
+            if (insertAfter != null) insertAfter.Next = newNode;
+            return newNode;
+
+        }
     }
 }
