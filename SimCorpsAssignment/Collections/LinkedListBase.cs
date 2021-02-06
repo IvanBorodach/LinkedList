@@ -5,7 +5,7 @@ using Collections.Elements;
 
 namespace Collections
 {
-    public abstract class LinkedListBase<TNode, TNodeIn> : ILinkedList<TNode> where TNode : INode
+    public abstract class LinkedListBase<TNode> : ILinkedList<TNode> where TNode : INode
     {
         protected TNode head;
 
@@ -18,7 +18,7 @@ namespace Collections
         {            
             var last = Traverse(x => IsLast(x), head);
             var node = Insert(last, text);
-            head = head ?? node;
+            head ??= node;
         }
 
         /// <summary>
@@ -28,7 +28,8 @@ namespace Collections
         /// <returns>First matching node</returns>
         public TNode GetFirst(string condition)
         {
-            throw new NotImplementedException();
+            return GetFirst(condition, head);
+            
         }
 
         /// <summary>
@@ -38,7 +39,11 @@ namespace Collections
         /// <returns>The single element in collection</returns>
         public TNode GetSingle(string condition)
         {
-            throw new NotImplementedException();
+            var first = GetFirst(condition, head);
+            if (first == null) throw new Exception("Nothing found");
+            var anotherOne = GetFirst(condition, first.Next);
+            if (anotherOne != null) throw new Exception("Sequence contains more than one element");
+            return first;
         }
 
         /// <summary>
@@ -70,8 +75,8 @@ namespace Collections
         /// <summary>
         /// Searches for first node that matches condition
         /// </summary>
-        /// <param name="predicate"></param>
-        /// <param name="startNode"></param>
+        /// <param name="predicate">Match condition</param>
+        /// <param name="startNode">Start search from</param>
         /// <returns>First node found. Null if nothing found</returns>
         protected INode Traverse(Func<INode, bool> predicate, INode startNode)
         {
@@ -79,6 +84,17 @@ namespace Collections
             return predicate(startNode)
                 ? startNode
                 : Traverse(predicate, startNode.Next);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="startNode"></param>
+        /// <returns></returns>
+        protected TNode GetFirst(string text, INode startNode)
+        {
+            return (TNode)Traverse(x => x.Text == text, startNode);
         }
 
         /// <summary>

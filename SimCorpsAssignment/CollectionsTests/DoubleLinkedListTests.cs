@@ -11,7 +11,7 @@ namespace CollectionsTests
     {
        public DoubleLinkedListTests()
         {
-            list = new DoubleLinkedList();
+            list = new DoubleLinkedList();            
         }
     }
 }

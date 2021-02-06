@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Collections
 {
-    public class DoubleLinkedList : LinkedListBase<DoubleLinkedNode, DoubleLinkedNode>
+    public class DoubleLinkedList : LinkedListBase<DoubleLinkedNode>
     {
         public DoubleLinkedList() { }
 

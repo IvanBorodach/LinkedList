@@ -68,8 +68,7 @@ namespace CollectionsTests
         public void GetSingle_Throws_MoreThanOneRecord()
         {
             list.Add("Third");
-            var record = list.GetSingle("Third");
-            Assert.IsNotNull(record);
+            Assert.ThrowsException<Exception>(() => list.GetSingle("Third"));
         }
 
         [TestMethod]
@@ -87,6 +86,15 @@ namespace CollectionsTests
             var toDelete = list.GetFirst("Second");
             list.Delete(toDelete);
             var left = list.GetFirst("Fourth");
+            Assert.IsNotNull(left);
+        }
+
+        [TestMethod]
+        public void Delete_DoesNotBreakChain_RemovingHead()
+        {
+            var toDelete = list.GetFirst("First");
+            list.Delete(toDelete);
+            var left = list.GetFirst("Fifth");
             Assert.IsNotNull(left);
         }
 
