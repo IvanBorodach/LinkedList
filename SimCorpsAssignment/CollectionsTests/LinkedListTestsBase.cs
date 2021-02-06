@@ -114,18 +114,18 @@ namespace CollectionsTests
         public void ToArray_ReturnsSameNumberOfElements()
         {
             var array = list.ToArray();
-            Assert.Equals(array.Length, 5);
+            Assert.AreEqual(array.Length, 5);
         }
 
         [TestMethod]
         public void ToArray_ReturnsCorrectElements()
         {
             var array = list.ToArray();
-            Assert.Equals(array[0], "First");
-            Assert.Equals(array[1], "Second");
-            Assert.Equals(array[2], "Trird");
-            Assert.Equals(array[3], "Fourth");
-            Assert.Equals(array[4], "Fifth");
+            Assert.AreEqual(array[0], "First");
+            Assert.AreEqual(array[1], "Second");
+            Assert.AreEqual(array[2], "Third");
+            Assert.AreEqual(array[3], "Fourth");
+            Assert.AreEqual(array[4], "Fifth");
         }
     }
 }

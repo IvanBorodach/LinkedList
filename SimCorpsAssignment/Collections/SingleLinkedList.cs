@@ -17,7 +17,7 @@ namespace Collections
             }
             else
             {
-                var previous = Traverse(x => x.Next == node, head);
+                var previous = Search(x => x.Next == node, head);
                 previous.Next = node.Next;
             }            
         }

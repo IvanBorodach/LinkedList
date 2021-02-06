@@ -5,7 +5,7 @@ using Collections.Elements;
 
 namespace Collections
 {
-    public abstract class LinkedListBase<TNode> : ILinkedList<TNode> where TNode : INode
+    public abstract class LinkedListBase<TNode> : ILinkedList<TNode> where TNode : class, INode
     {
         protected TNode head;
 
@@ -15,8 +15,8 @@ namespace Collections
         /// </summary>
         /// <param name="node"></param>
         public virtual void Add(string text)
-        {            
-            var last = Traverse(x => IsLast(x), head);
+        {
+            var last = Search(x => IsLast(x), head);
             var node = Insert(last, text);
             head ??= node;
         }
@@ -29,7 +29,7 @@ namespace Collections
         public TNode GetFirst(string condition)
         {
             return GetFirst(condition, head);
-            
+
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Collections
         {
             if (node == null) throw new Exception("No argument passed");
             if (!(node is TNode)) throw new Exception("Wrong argument type");
-            Delete((TNode)node);           
+            Delete((TNode)node);
         }
 
         /// <summary>
@@ -63,12 +63,31 @@ namespace Collections
         /// <returns>Array of node values</returns>
         public string[] ToArray()
         {
-            throw new NotImplementedException();
+            var size = Count();
+            var array = new String[size];
+            var node = head;
+            int ii = 0;
+
+            while (node != null)
+            {
+                array[ii] = node.Text;
+                node = (TNode)node.Next;
+                ii++;
+            }
+
+            return array;
         }
         #endregion
 
-
         #region Protected Methods
+
+        protected int Count(int count = 0, TNode startFrom = null)
+        {
+            startFrom ??= head;
+            count++;
+            if (IsLast(startFrom)) return count;
+            return Count(count, (TNode)startFrom.Next);
+        }
         protected virtual bool IsLast(TNode node)
         {
             return node.Next == null;
@@ -80,13 +99,13 @@ namespace Collections
         /// <param name="predicate">Match condition</param>
         /// <param name="startNode">Start search from</param>
         /// <returns>First node found. Null if nothing found</returns>
-        protected TNode Traverse(Func<TNode, bool> predicate, object startNode)
+        protected TNode Search(Func<TNode, bool> predicate, object startNode)
         {
-            if (startNode == null) return default(TNode);
+            if (startNode == null) return null;
             var start = (TNode)startNode;
             return predicate(start)
                 ? start
-                : Traverse(predicate, (TNode)start.Next);
+                : Search(predicate, (TNode)start.Next);
         }
 
         /// <summary>
@@ -97,7 +116,7 @@ namespace Collections
         /// <returns></returns>
         protected TNode GetFirst(string text, object startNode)
         {
-            return (TNode)Traverse(x => x.Text == text, startNode);
+            return (TNode)Search(x => x.Text == text, startNode);
         }
 
         /// <summary>
