@@ -6,7 +6,7 @@ namespace Collections.Elements
 {
     public class Node : INode
     {
-        INode INode.Next { get; set; }
+        public INode Next { get; internal set; }
         public string Text { get; set; }
         
     }

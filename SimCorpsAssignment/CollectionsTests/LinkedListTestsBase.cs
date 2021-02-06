@@ -105,6 +105,12 @@ namespace CollectionsTests
         }
 
         [TestMethod]
+        public void Delete_Throws_WrongObjectPassed()
+        {
+            Assert.ThrowsException<Exception>(() => list.Delete(new object()));
+        }
+
+        [TestMethod]
         public void ToArray_ReturnsSameNumberOfElements()
         {
             var array = list.ToArray();

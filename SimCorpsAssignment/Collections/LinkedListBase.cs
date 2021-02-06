@@ -52,7 +52,9 @@ namespace Collections
         /// <param name="node">Node to delete</param>
         public void Delete(object node)
         {
-            throw new NotImplementedException();
+            if (node == null) throw new Exception("No argument passed");
+            if (!(node is TNode)) throw new Exception("Wrong argument type");
+            Delete((TNode)node);           
         }
 
         /// <summary>
@@ -67,7 +69,7 @@ namespace Collections
 
 
         #region Protected Methods
-        protected virtual bool IsLast(INode node)
+        protected virtual bool IsLast(TNode node)
         {
             return node.Next == null;
         }
@@ -78,12 +80,13 @@ namespace Collections
         /// <param name="predicate">Match condition</param>
         /// <param name="startNode">Start search from</param>
         /// <returns>First node found. Null if nothing found</returns>
-        protected INode Traverse(Func<INode, bool> predicate, INode startNode)
+        protected TNode Traverse(Func<TNode, bool> predicate, object startNode)
         {
-            if (startNode == null) return null;
-            return predicate(startNode)
-                ? startNode
-                : Traverse(predicate, startNode.Next);
+            if (startNode == null) return default(TNode);
+            var start = (TNode)startNode;
+            return predicate(start)
+                ? start
+                : Traverse(predicate, (TNode)start.Next);
         }
 
         /// <summary>
@@ -92,7 +95,7 @@ namespace Collections
         /// <param name="text"></param>
         /// <param name="startNode"></param>
         /// <returns></returns>
-        protected TNode GetFirst(string text, INode startNode)
+        protected TNode GetFirst(string text, object startNode)
         {
             return (TNode)Traverse(x => x.Text == text, startNode);
         }
@@ -102,7 +105,9 @@ namespace Collections
         /// </summary>
         /// <param name="insetAfter"></param>
         /// <returns>Node inserted</returns>
-        protected abstract TNode Insert(INode insetAfter, string text);
+        protected abstract TNode Insert(TNode insetAfter, string text);
+
+        protected abstract void Delete(TNode node);
 
         #endregion
     }

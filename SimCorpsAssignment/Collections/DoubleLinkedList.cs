@@ -9,9 +9,23 @@ namespace Collections
     {
         public DoubleLinkedList() { }
 
-        protected override DoubleLinkedNode Insert(INode insertAfter, string text)
+        protected override void Delete(DoubleLinkedNode node)
         {
-            var newNode = new DoubleLinkedNode { Text = text, Previous = insertAfter};
+            if (head == node)
+            {
+                head = (DoubleLinkedNode)node.Next;
+                ((DoubleLinkedNode)node.Next).Previous = null;
+            }
+            else
+            {
+                ((DoubleLinkedNode)node.Previous).Next = node.Next;
+                ((DoubleLinkedNode)node.Next).Previous = node.Previous;
+            }
+        }
+
+        protected override DoubleLinkedNode Insert(DoubleLinkedNode insertAfter, string text)
+        {
+            var newNode = new DoubleLinkedNode { Text = text, Previous = insertAfter };
             if (insertAfter != null) insertAfter.Next = newNode;
             return newNode;
         }

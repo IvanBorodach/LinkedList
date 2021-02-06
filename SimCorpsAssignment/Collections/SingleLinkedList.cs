@@ -9,7 +9,20 @@ namespace Collections
     {
         public SingleLinkedList(){ }
 
-        protected override Node Insert(INode insertAfter, string text)
+        protected override void Delete(Node node)
+        {
+            if (head == node)
+            {
+                head = (Node)node.Next;
+            }
+            else
+            {
+                var previous = Traverse(x => x.Next == node, head);
+                previous.Next = node.Next;
+            }            
+        }
+
+        protected override Node Insert(Node insertAfter, string text)
         {
             var newNode = new Node { Text = text };
             if (insertAfter != null) insertAfter.Next = newNode;

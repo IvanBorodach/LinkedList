@@ -6,7 +6,7 @@ namespace Collections.Elements
 {
     public interface INode
     {
-        INode Next { get; internal set; }
+        INode Next { get; }
         string Text { get; set; }
     }
 }
