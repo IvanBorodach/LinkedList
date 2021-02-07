@@ -5,38 +5,25 @@ using Collections.Elements;
 
 namespace Collections
 {
-    public abstract class LinkedListBase<TNode> : ILinkedList<TNode> where TNode : BaseNode<TNode>
+    public abstract class LinkedListBase<TNode> : ILinkedList<TNode> where TNode : NodeBase<TNode>
     {
         protected TNode head;
 
         #region Public Methods
-        /// <summary>
-        /// Adds a new node to the end of the list
-        /// </summary>
-        /// <param name="node"></param>
+                
         public virtual void Add(string text)
         {
             var last = Search(x => IsLast(x), head);
             var node = Insert(last, text);
             head ??= node;
         }
-
-        /// <summary>
-        /// Searches for a first node with matching text
-        /// </summary>
-        /// <param name="condition"></param>
-        /// <returns>First matching node</returns>
+               
         public TNode GetFirst(string condition)
         {
             return GetFirst(condition, head);
 
         }
-
-        /// <summary>
-        /// Returns matching node. Throws an exception if there's not exactly one element
-        /// </summary>
-        /// <param name="condition"></param>
-        /// <returns>The single element in collection</returns>
+                
         public TNode GetSingle(string condition)
         {
             var first = GetFirst(condition, head);
@@ -45,22 +32,14 @@ namespace Collections
             if (anotherOne != null) throw new Exception("Sequence contains more than one element");
             return first;
         }
-
-        /// <summary>
-        /// Deletes specified node from collection
-        /// </summary>
-        /// <param name="node">Node to delete</param>
+                
         public void Delete(object node)
         {
             if (node == null) throw new Exception("No argument passed");
             if (!(node is TNode)) throw new Exception("Wrong argument type");
             Delete((TNode)node);
         }
-
-        /// <summary>
-        /// Node values in an array
-        /// </summary>
-        /// <returns>Array of node values</returns>
+                
         public string[] ToArray()
         {
             var size = Count();

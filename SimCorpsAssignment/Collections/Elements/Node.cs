@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Collections.Elements
 {
-    public class Node : BaseNode<Node>
+    public class Node : NodeBase<Node>
     {   
     }
 }
