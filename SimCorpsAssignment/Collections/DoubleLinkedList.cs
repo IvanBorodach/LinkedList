@@ -13,13 +13,13 @@ namespace Collections
         {
             if (head == node)
             {
-                head = (DoubleLinkedNode)node.Next;
-                ((DoubleLinkedNode)node.Next).Previous = null;
+                head = node.Next;
+                node.Next.Previous = null;
             }
             else
             {
-                ((DoubleLinkedNode)node.Previous).Next = node.Next;
-                ((DoubleLinkedNode)node.Next).Previous = node.Previous;
+                node.Previous.Next = node.Next;
+                node.Next.Previous = node.Previous;
             }
         }
 

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Collections.Elements
 {
-    public class Node : BaseNode<Node>
-    {   
+    public interface INode
+    {
+        public string Text { get; set; }        
     }
 }

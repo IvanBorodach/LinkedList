@@ -5,7 +5,7 @@ using Collections.Elements;
 
 namespace Collections
 {
-    public abstract class LinkedListBase<TNode> : ILinkedList<TNode> where TNode : Node
+    public abstract class LinkedListBase<TNode> : ILinkedList<TNode> where TNode : BaseNode<TNode>
     {
         protected TNode head;
 
@@ -41,7 +41,7 @@ namespace Collections
         {
             var first = GetFirst(condition, head);
             if (first == null) throw new Exception("Nothing found");
-            var anotherOne = GetFirst(condition, first.Next as TNode);
+            var anotherOne = GetFirst(condition, first.Next);
             if (anotherOne != null) throw new Exception("Sequence contains more than one element");
             return first;
         }
@@ -71,7 +71,7 @@ namespace Collections
             while (node != null)
             {
                 array[ii] = node.Text;
-                node = node.Next as TNode;
+                node = node.Next;
                 ii++;
             }
 
@@ -86,7 +86,7 @@ namespace Collections
             startFrom ??= head;
             count++;
             if (IsLast(startFrom)) return count;
-            return Count(count, startFrom.Next as TNode);
+            return Count(count, startFrom.Next);
         }
         protected virtual bool IsLast(TNode node)
         {
@@ -102,10 +102,10 @@ namespace Collections
         protected TNode Search(Func<TNode, bool> predicate, TNode startNode)
         {
             if (startNode == null) return null;
-            var start = (TNode)startNode;
+            var start = startNode;
             return predicate(start)
                 ? start
-                : Search(predicate, start.Next as TNode);
+                : Search(predicate, start.Next);
         }
 
         /// <summary>

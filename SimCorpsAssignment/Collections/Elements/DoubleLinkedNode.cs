@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Collections.Elements
 {
-    public class DoubleLinkedNode : Node
+    public class DoubleLinkedNode : BaseNode<DoubleLinkedNode>
     {
         public DoubleLinkedNode Previous { get; internal set; }        
     }
