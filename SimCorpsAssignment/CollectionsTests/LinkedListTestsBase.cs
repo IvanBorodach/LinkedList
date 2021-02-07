@@ -9,7 +9,7 @@ namespace CollectionsTests
     [TestClass]
     public abstract class LinkedListTestsBase
     {
-        protected ILinkedList<INode> list;
+        protected ILinkedList<Node> list;
 
         [TestInitialize]
         public void Initialize()

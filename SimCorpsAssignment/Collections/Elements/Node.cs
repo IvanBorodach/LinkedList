@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Collections.Elements
 {
-    public class Node : INode
+    public class Node
     {
-        public INode Next { get; internal set; }
+        public Node Next { get; internal set; }
         public string Text { get; set; }
-        
     }
 }

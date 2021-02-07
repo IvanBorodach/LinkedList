@@ -5,7 +5,7 @@ using Collections.Elements;
 
 namespace Collections
 {
-    public abstract class LinkedListBase<TNode> : ILinkedList<TNode> where TNode : class, INode
+    public abstract class LinkedListBase<TNode> : ILinkedList<TNode> where TNode : Node
     {
         protected TNode head;
 
@@ -41,7 +41,7 @@ namespace Collections
         {
             var first = GetFirst(condition, head);
             if (first == null) throw new Exception("Nothing found");
-            var anotherOne = GetFirst(condition, first.Next);
+            var anotherOne = GetFirst(condition, first.Next as TNode);
             if (anotherOne != null) throw new Exception("Sequence contains more than one element");
             return first;
         }
@@ -71,7 +71,7 @@ namespace Collections
             while (node != null)
             {
                 array[ii] = node.Text;
-                node = (TNode)node.Next;
+                node = node.Next as TNode;
                 ii++;
             }
 
@@ -86,7 +86,7 @@ namespace Collections
             startFrom ??= head;
             count++;
             if (IsLast(startFrom)) return count;
-            return Count(count, (TNode)startFrom.Next);
+            return Count(count, startFrom.Next as TNode);
         }
         protected virtual bool IsLast(TNode node)
         {
@@ -99,13 +99,13 @@ namespace Collections
         /// <param name="predicate">Match condition</param>
         /// <param name="startNode">Start search from</param>
         /// <returns>First node found. Null if nothing found</returns>
-        protected TNode Search(Func<TNode, bool> predicate, object startNode)
+        protected TNode Search(Func<TNode, bool> predicate, TNode startNode)
         {
             if (startNode == null) return null;
             var start = (TNode)startNode;
             return predicate(start)
                 ? start
-                : Search(predicate, (TNode)start.Next);
+                : Search(predicate, start.Next as TNode);
         }
 
         /// <summary>
@@ -114,9 +114,9 @@ namespace Collections
         /// <param name="text"></param>
         /// <param name="startNode"></param>
         /// <returns></returns>
-        protected TNode GetFirst(string text, object startNode)
+        protected TNode GetFirst(string text, TNode startNode)
         {
-            return (TNode)Search(x => x.Text == text, startNode);
+            return Search(x => x.Text == text, startNode);
         }
 
         /// <summary>

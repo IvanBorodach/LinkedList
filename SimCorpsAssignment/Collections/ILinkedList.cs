@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Collections
 {
-    public interface ILinkedList<out TNode> where TNode : INode
+    public interface ILinkedList<out TNode>
     {
         void Add(string text);
         TNode GetFirst(string condition); 

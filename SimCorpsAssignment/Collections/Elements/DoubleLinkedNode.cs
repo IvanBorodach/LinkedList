@@ -6,6 +6,6 @@ namespace Collections.Elements
 {
     public class DoubleLinkedNode : Node
     {
-        public INode Previous { get; internal set; }
+        public DoubleLinkedNode Previous { get; internal set; }        
     }
 }
