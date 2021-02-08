@@ -1,7 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Linq;
-using Collections.Elements;
+﻿using Collections.Elements;
+using System;
 
 namespace Collections
 {
@@ -10,20 +8,20 @@ namespace Collections
         protected TNode head;
 
         #region Public Methods
-                
+
         public virtual void Add(string text)
         {
             var last = Search(x => IsLast(x), head);
             var node = Insert(last, text);
             head ??= node;
         }
-               
+
         public TNode GetFirst(string condition)
         {
             return GetFirst(condition, head);
 
         }
-                
+
         public TNode GetSingle(string condition)
         {
             var first = GetFirst(condition, head);
@@ -32,14 +30,14 @@ namespace Collections
             if (anotherOne != null) throw new Exception("Sequence contains more than one element");
             return first;
         }
-                
+
         public void Delete(object node)
         {
             if (node == null) throw new Exception("No argument passed");
             if (!(node is TNode)) throw new Exception("Wrong argument type");
             Delete((TNode)node);
         }
-                
+
         public string[] ToArray()
         {
             var size = Count();

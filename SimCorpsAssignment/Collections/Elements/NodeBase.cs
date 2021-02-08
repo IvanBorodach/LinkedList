@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Collections.Elements
+﻿namespace Collections.Elements
 {
     public abstract class NodeBase<T> : INode
     {

@@ -2,7 +2,6 @@
 using Collections.Elements;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Text;
 
 namespace CollectionsTests
 {

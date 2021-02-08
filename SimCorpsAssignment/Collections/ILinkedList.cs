@@ -1,9 +1,4 @@
-﻿using Collections.Elements;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Collections
+﻿namespace Collections
 {
     public interface ILinkedList<out TNode>
     {

@@ -1,13 +1,10 @@
 ﻿using Collections.Elements;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Collections
 {
     public class SingleLinkedList : LinkedListBase<Node>
     {
-        public SingleLinkedList(){ }
+        public SingleLinkedList() { }
 
         protected override void Delete(Node node)
         {
@@ -19,7 +16,7 @@ namespace Collections
             {
                 var previous = Search(x => x.Next == node, head);
                 previous.Next = node.Next;
-            }            
+            }
         }
 
         protected override Node Insert(Node insertAfter, string text)

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Collections.Elements
+﻿namespace Collections.Elements
 {
     public class DoubleLinkedNode : NodeBase<DoubleLinkedNode>
     {
-        public DoubleLinkedNode Previous { get; internal set; }        
+        public DoubleLinkedNode Previous { get; internal set; }
     }
 }
